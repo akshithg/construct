@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="CONSTRUCT decompiles controller logic from FMUs, maps operations to control semantics, and generates Modelica models."
+    />
+    <meta name="theme-color" content="#f7f9f8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d1110" media="(prefers-color-scheme: dark)" />
+    <title>CONSTRUCT — Controller Model Recovery</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090c10'/%3E%3Cpath d='M18 18h28v8H26v12h20v8H18z' fill='%238af7c2'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="CONSTRUCT home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span>CONSTRUCT</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#pipeline">Pipeline</a>
+        <a href="#benchmarks">Benchmarks</a>
+        <a href="#examples">Examples</a>
+        <a class="nav-cta" href="https://github.com/akshithg/construct">View source</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="status-dot"></span> Controller model recovery</p>
+          <h1>Recover controller models<br />from compiled FMUs.</h1>
+          <p class="hero-lede">
+            CONSTRUCT decompiles controller binaries, maps operations to control semantics,
+            generates Modelica, and compares output traces.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#benchmarks">View benchmark <span>↓</span></a>
+            <a class="button button-ghost" href="https://arxiv.org/abs/2308.00250">Read the paper ↗</a>
+          </div>
+        </div>
+
+        <div class="terminal-card reveal" aria-label="Example CONSTRUCT terminal output">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <p>construct / recover</p>
+          </div>
+          <div class="terminal-body">
+            <p><span class="prompt">$</span> construct recover anti_windup_pid.fmu</p>
+            <p class="muted">→ locating controller step routine</p>
+            <p class="muted">→ extracting typed control sketch</p>
+            <p class="muted">→ searching 10,080 candidate mappings</p>
+            <p><span class="success">✓ exact mapping found</span> <span class="dim">generation 4</span></p>
+            <div class="terminal-rule"></div>
+            <dl>
+              <div><dt>evaluations</dt><dd>1,233</dd></div>
+              <div><dt>mean squared error</dt><dd>5.79e−32</dd></div>
+              <div><dt>elapsed</dt><dd>0.088 s</dd></div>
+              <div><dt>output</dt><dd class="file">AntiWindupPID.mo</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="Benchmark summary">
+        <div class="metric reveal"><strong>11</strong><span>controller families</span></div>
+        <div class="metric reveal"><strong>11/11</strong><span>exact mappings</span></div>
+        <div class="metric reveal"><strong>&lt; 0.09s</strong><span>maximum search time</span></div>
+        <div class="metric reveal"><strong>10,080</strong><span>largest search space</span></div>
+      </section>
+
+      <section class="section pipeline-section" id="pipeline">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Pipeline</p>
+          <h2>Pipeline stages</h2>
+          <p>The pipeline retains intermediate artifacts for inspection.</p>
+        </div>
+
+        <ol class="pipeline reveal">
+          <li>
+            <span class="step-number">01</span>
+            <div class="step-copy">
+              <h3>FMU</h3>
+              <p>Compiled controller binary and model description.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <div class="step-copy">
+              <h3>Ghidra</h3>
+              <p>Headless decompilation extracts operations and data flow.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <div class="step-copy">
+              <h3>Control sketch</h3>
+              <p>A typed intermediate representation records controller structure.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">04</span>
+            <div class="step-copy">
+              <h3>GA mapping</h3>
+              <p>Candidate semantics are searched against observed traces.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">05</span>
+            <div class="step-copy">
+              <h3>Modelica</h3>
+              <p>The selected mapping is emitted as Modelica and compared with source traces.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section benchmark-section" id="benchmarks">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Benchmark suite</p>
+          <h2>Results across 11 controller families</h2>
+          <p>
+            Cases range from stateless gain blocks to controllers with scheduling, saturation,
+            and anti-windup behavior.
+          </p>
+        </div>
+
+        <div class="benchmark-layout">
+          <div class="chart-card reveal">
+            <div class="card-heading">
+              <div>
+                <p class="card-kicker">Search space</p>
+                <h3>Candidate mappings by controller</h3>
+              </div>
+              <span class="scale-note">log scale</span>
+            </div>
+            <div id="space-chart" class="space-chart" role="img" aria-label="Logarithmic bar chart of candidate mappings by controller"></div>
+          </div>
+
+          <div class="result-card reveal">
+            <p class="card-kicker">Suite result</p>
+            <div class="result-ring" aria-label="11 out of 11 exact mappings">
+              <span><strong>11</strong><small>/ 11</small></span>
+            </div>
+            <h3>11 exact mappings</h3>
+            <p>All generated models matched source outputs within floating-point precision.</p>
+            <div class="precision-row"><span>Worst MSE</span><strong>2.60e−31</strong></div>
+          </div>
+        </div>
+
+        <div class="table-card reveal">
+          <div class="table-toolbar">
+            <div>
+              <p class="card-kicker">All benchmark runs</p>
+              <h3>Recovery results</h3>
+            </div>
+            <div class="filters" role="group" aria-label="Filter benchmark table">
+              <button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="filter" type="button" data-filter="linear" aria-pressed="false">Linear</button>
+              <button class="filter" type="button" data-filter="nonlinear" aria-pressed="false">Nonlinear</button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Controller</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Search space</th>
+                  <th scope="col">Generation</th>
+                  <th scope="col">Evaluations</th>
+                  <th scope="col">MSE</th>
+                  <th scope="col">Result</th>
+                </tr>
+              </thead>
+              <tbody id="benchmark-rows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="examples">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Examples</p>
+          <h2>Controller cases</h2>
+          <p>The cases are grouped by control structure and increase in complexity.</p>
+        </div>
+        <div id="example-grid" class="example-grid"></div>
+      </section>
+
+      <section class="section artifacts-section">
+        <div class="artifact-copy reveal">
+          <p class="eyebrow">Outputs</p>
+          <h2>Generated artifacts</h2>
+          <p>
+            Running the suite writes decompiled operations, control sketches, search reports,
+            Modelica models, and trace comparisons to the artifacts directory.
+          </p>
+          <div class="command-box">
+            <code>uv run construct-demo run-all</code>
+            <button id="copy-command" type="button" aria-label="Copy command">Copy</button>
+          </div>
+        </div>
+
+        <div class="artifact-tree reveal" aria-label="Generated artifact directory tree">
+          <p><span class="folder">artifacts/</span></p>
+          <p><span class="branch">├──</span> <span class="folder">decompiled/</span></p>
+          <p><span class="branch">├──</span> <span class="folder">sketches/</span></p>
+          <p><span class="branch">├──</span> <span class="folder">models/</span></p>
+          <p><span class="branch">├──</span> <span class="folder">traces/</span></p>
+          <p><span class="branch">├──</span> benchmark.json</p>
+          <p><span class="branch">└──</span> report.html</p>
+        </div>
+      </section>
+
+      <section class="cta-section reveal">
+        <p class="eyebrow">Source code</p>
+        <h2>Run the benchmark locally</h2>
+        <p>The repository includes the controller examples, pipeline, tests, and benchmark command.</p>
+        <a class="button button-primary" href="https://github.com/akshithg/construct">View repository ↗</a>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">C</span><span>CONSTRUCT</span></a>
+      <p>Controller model recovery from compiled FMUs.</p>
+      <div>
+        <a href="https://arxiv.org/abs/2308.00250">Paper</a>
+        <a href="https://github.com/akshithg/construct">GitHub</a>
+      </div>
+    </footer>
+  </body>
+</html>
