@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="AntiWindupPIDController" guid="construct-demo-antiwindup-pid">
+  <CoSimulation modelIdentifier="antiwindup_pid"/>
+  <ModelVariables>
+    <ScalarVariable name="yMax" valueReference="25" causality="parameter"><Real start="3.0"/></ScalarVariable>
+    <ScalarVariable name="measurement" valueReference="11" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="Kd" valueReference="22" causality="parameter"><Real start="0.12"/></ScalarVariable>
+    <ScalarVariable name="Kaw" valueReference="26" causality="parameter"><Real start="0.8"/></ScalarVariable>
+    <ScalarVariable name="control_output" valueReference="30" causality="output"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="N" valueReference="23" causality="parameter"><Real start="8.0"/></ScalarVariable>
+    <ScalarVariable name="setpoint" valueReference="10" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="yMin" valueReference="24" causality="parameter"><Real start="-3.0"/></ScalarVariable>
+    <ScalarVariable name="Ki" valueReference="21" causality="parameter"><Real start="0.6"/></ScalarVariable>
+    <ScalarVariable name="Kp" valueReference="20" causality="parameter"><Real start="1.7"/></ScalarVariable>
+  </ModelVariables>
+</fmiModelDescription>

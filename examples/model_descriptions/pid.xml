@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="PIDController" guid="construct-demo-pid">
+  <CoSimulation modelIdentifier="pid"/>
+  <ModelVariables>
+    <ScalarVariable name="Kd" valueReference="22" causality="parameter"><Real start="0.15"/></ScalarVariable>
+    <ScalarVariable name="measurement" valueReference="11" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="control_output" valueReference="30" causality="output"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="N" valueReference="23" causality="parameter"><Real start="10.0"/></ScalarVariable>
+    <ScalarVariable name="setpoint" valueReference="10" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="Ki" valueReference="21" causality="parameter"><Real start="0.5"/></ScalarVariable>
+    <ScalarVariable name="Kp" valueReference="20" causality="parameter"><Real start="2.0"/></ScalarVariable>
+  </ModelVariables>
+</fmiModelDescription>

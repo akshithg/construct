@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="CascadePositionRateController" guid="construct-demo-cascade-pi">
+  <CoSimulation modelIdentifier="cascade_pi"/>
+  <ModelVariables>
+    <ScalarVariable name="innerKi" valueReference="23" causality="parameter"><Real start="0.35"/></ScalarVariable>
+    <ScalarVariable name="positionMeasurement" valueReference="11" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="outerKp" valueReference="20" causality="parameter"><Real start="1.1"/></ScalarVariable>
+    <ScalarVariable name="control_output" valueReference="30" causality="output"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="rateMeasurement" valueReference="12" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="outerKi" valueReference="21" causality="parameter"><Real start="0.2"/></ScalarVariable>
+    <ScalarVariable name="setpoint" valueReference="10" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="innerKp" valueReference="22" causality="parameter"><Real start="1.8"/></ScalarVariable>
+  </ModelVariables>
+</fmiModelDescription>

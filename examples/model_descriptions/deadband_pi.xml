@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="DeadbandPIController" guid="construct-demo-deadband-pi">
+  <CoSimulation modelIdentifier="deadband_pi"/>
+  <ModelVariables>
+    <ScalarVariable name="deadband" valueReference="22" causality="parameter"><Real start="0.75"/></ScalarVariable>
+    <ScalarVariable name="measurement" valueReference="11" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="Ki" valueReference="21" causality="parameter"><Real start="0.45"/></ScalarVariable>
+    <ScalarVariable name="control_output" valueReference="30" causality="output"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="setpoint" valueReference="10" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="Kp" valueReference="20" causality="parameter"><Real start="1.6"/></ScalarVariable>
+  </ModelVariables>
+</fmiModelDescription>

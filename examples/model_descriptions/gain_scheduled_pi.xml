@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="GainScheduledPIController" guid="construct-demo-gain-scheduled-pi">
+  <CoSimulation modelIdentifier="gain_scheduled_pi"/>
+  <ModelVariables>
+    <ScalarVariable name="KpHigh" valueReference="21" causality="parameter"><Real start="2.2"/></ScalarVariable>
+    <ScalarVariable name="measurement" valueReference="11" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="KiLow" valueReference="22" causality="parameter"><Real start="0.25"/></ScalarVariable>
+    <ScalarVariable name="schedule" valueReference="12" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="control_output" valueReference="30" causality="output"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="threshold" valueReference="24" causality="parameter"><Real start="0.5"/></ScalarVariable>
+    <ScalarVariable name="setpoint" valueReference="10" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="KiHigh" valueReference="23" causality="parameter"><Real start="0.65"/></ScalarVariable>
+    <ScalarVariable name="KpLow" valueReference="20" causality="parameter"><Real start="1.0"/></ScalarVariable>
+  </ModelVariables>
+</fmiModelDescription>

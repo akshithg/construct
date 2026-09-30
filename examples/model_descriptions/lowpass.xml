@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="FirstOrderLowPass" guid="construct-demo-lowpass">
+  <CoSimulation modelIdentifier="lowpass"/>
+  <ModelVariables>
+    <ScalarVariable name="filtered_output" valueReference="30" causality="output"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="tau" valueReference="20" causality="parameter"><Real start="0.35"/></ScalarVariable>
+    <ScalarVariable name="command" valueReference="10" causality="input"><Real start="0"/></ScalarVariable>
+  </ModelVariables>
+</fmiModelDescription>

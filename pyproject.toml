@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "construct-demo"
+version = "0.1.0"
+description = "End-to-end research prototype inspired by the CONSTRUCT paper"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "CONSTRUCT demo contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest==8.4.2",
+  "ruff==0.13.2",
+  "ty==0.0.1a21",
+]
+
+[project.scripts]
+construct-demo = "construct_demo.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/construct_demo"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["A", "B", "C4", "C90", "D", "E", "F", "I", "N", "PL", "PT", "RUF", "SIM", "TID", "UP"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pylint]
+max-args = 6
+max-statements = 60
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+
+[tool.ty.environment]
+python-version = "3.11"

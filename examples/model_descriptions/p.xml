@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="ProportionalController" guid="construct-demo-p">
+  <CoSimulation modelIdentifier="p"/>
+  <ModelVariables>
+    <ScalarVariable name="measurement" valueReference="11" causality="input"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="Kp" valueReference="20" causality="parameter"><Real start="1.8"/></ScalarVariable>
+    <ScalarVariable name="control_output" valueReference="30" causality="output"><Real start="0"/></ScalarVariable>
+    <ScalarVariable name="setpoint" valueReference="10" causality="input"><Real start="0"/></ScalarVariable>
+  </ModelVariables>
+</fmiModelDescription>
